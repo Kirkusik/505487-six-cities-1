@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Роман Марченко](https://up.htmlacademy.ru/react/1/user/505487).
-* Наставник: `Неизвестно`.
+* Наставник: [Виталий Яковенко](https://github.com/phwb).
 
 ---
 
