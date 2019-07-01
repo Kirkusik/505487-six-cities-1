@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 export default class PlaceCard extends Component {
 
   constructor(props) {
     super(props);
-
   }
 
   render() {
@@ -13,31 +13,27 @@ export default class PlaceCard extends Component {
       id,
       title,
       degree,
-      order,
-      photo,
+      previewImage,
+      isPremium,
       price} = this.props.data;
-    const {
-      onClick,
-      onHover,
-      onDeHover} = this.props;
+    const {onHover, onClickActiveCard, activeIndex} = this.props;
     return (
       <article
-        onMouseEnter={() => {
-          onHover(id);
-        }}
-        onMouseLeave={onDeHover}
+        onMouseEnter={onHover}
         className="cities__place-card place-card">
-        <div className="place-card__mark">
-          <span>{order}</span>
-        </div>
+        {isPremium ? <div className="place-card__mark">
+          <span>Premium</span>
+        </div> : ``}
+
         <div className="cities__image-wrapper place-card__image-wrapper">
           <a href="#" >
             <img
-              onClick={()=> {
-                onClick(id);
+              onClick={(evt) => {
+                evt.preventDefault();
+                onClickActiveCard(activeIndex);
               }}
               className="place-card__image"
-              src={photo}
+              src={previewImage}
               width={260}
               height={200}
               alt="Place image" />
@@ -63,7 +59,7 @@ export default class PlaceCard extends Component {
             </div>
           </div>
           <h2 className="place-card__name">
-            <a href="#" >{title}</a>
+            <Link to={`/offer/${id}`} >{title}</Link>
           </h2>
           <p className="place-card__type">{degree}</p>
         </div>
@@ -73,16 +69,18 @@ export default class PlaceCard extends Component {
 }
 
 PlaceCard.propTypes = {
-  onClick: PropTypes.func,
-  onDeHover: PropTypes.func,
+  onClickActiveCard: PropTypes.func,
+  activeIndex: PropTypes.number,
   onHover: PropTypes.func,
   data: PropTypes.shape({
+    previewImage: PropTypes.string,
     id: PropTypes.number,
     degree: PropTypes.string,
     order: PropTypes.string,
     photo: PropTypes.string,
-    price: PropTypes.string,
+    price: PropTypes.number,
     title: PropTypes.string,
+    isPremium: PropTypes.bool
   }).isRequired,
 };
 
