@@ -26,7 +26,7 @@ describe(`Test e2e value component`, () => {
   it(`Click on link - 'Head in Card'`, () => {
     const imageCard = app.find(`.place-card__image`);
     imageCard.simulate(`click`, {
-      preventDefault: () => {},
+      preventDefault: () => {}
     });
 
     expect(clickHandler).toHaveBeenCalledTimes(1);
