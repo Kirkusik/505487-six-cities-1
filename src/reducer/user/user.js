@@ -39,6 +39,14 @@ const Operation = {
           dispatch(ActionCreator.userLogin());
         }
       });
+  },
+  userSaveCockie: () => (dispatch, _getState, api) => {
+    return api.get(`/login`).then(({data, status}) => {
+      if (status === 200) {
+        dispatch(ActionCreator.userSaveData(data));
+        dispatch(ActionCreator.userLogin());
+      }
+    });
   }
 };
 
@@ -59,6 +67,7 @@ const reducer = (state = initialState, action) => {
     default: return state;
   }
 };
+
 
 export {
   reducer,
