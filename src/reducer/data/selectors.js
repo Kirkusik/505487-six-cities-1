@@ -13,7 +13,6 @@ export const getReviewsList = (state) => {
   return state[NAME_SPACE].reviews;
 };
 
-
 export const getFavoritesOffers = (state) => {
   return state[NAME_SPACE].favorite;
 };
