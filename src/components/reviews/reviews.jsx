@@ -1,8 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Rating from '../rating/rating.jsx';
 
 const Reviews = ({reviews}) => {
+
   const reviewsList = reviews.map((review, index) => {
+    const options = {
+      month: `long`,
+      year: `numeric`,
+    };
     return <li className="reviews__item" key={index}>
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
@@ -13,12 +19,12 @@ const Reviews = ({reviews}) => {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: `94%`}} />
+            <Rating rating={review.rating}/>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <p className="reviews__text">{review.comment}</p>
-        <time className="reviews__time" dateTime="2019-04-24">{review.date}</time>
+        <time className="reviews__time" dateTime={review.date}>{new Date(review.date).toLocaleDateString(`en-US`, options)}</time>
       </div>
     </li>;
   });
@@ -32,6 +38,7 @@ const Reviews = ({reviews}) => {
 
 Reviews.propTypes = {
   reviews: PropTypes.array,
+  rating: PropTypes.number
 };
 
 export default Reviews;

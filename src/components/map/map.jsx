@@ -1,13 +1,12 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import leaflet from 'leaflet';
 
 import {getCurrentCity} from '../../reducer/user/selectors';
-// eslint-disable-next-line no-unused-vars
-import {getCurrentOffers, getCurrentCityLocation, getActiveCard} from '../../reducer/data/selectors';
+import {getCurrentCityLocation, getActiveCard} from '../../reducer/data/selectors';
 
-class Map extends Component {
+class Map extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -22,7 +21,6 @@ class Map extends Component {
     }
   }
   _initMap() {
-
     const city = this.props.cityLocation;
     this._map = leaflet.map(`map`, {
       center: city,

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import Header from '../header/header.jsx';
 import Gallery from '../gallery/gallery.jsx';
@@ -7,11 +7,17 @@ import Reviews from '../reviews/reviews.jsx';
 import AddReviews from '../add-reviews/add-reviews.jsx';
 import HotelDescription from '../hotel-description/hotel-description.jsx';
 import {connect} from 'react-redux';
-import {getCurrentOffer, getReviewsList, getOffers, getNearOffers} from '../../reducer/data/selectors';
+import {getCurrentOffer, getReviewsList, getNearOffers} from '../../reducer/data/selectors';
+import {getAutorizationStatus} from '../../reducer/user/selectors';
 import {Operation} from '../../reducer/data/data';
 import PlaceList from '../../components/place-list/place-list.jsx';
+import withAddComments from '../../hocs/with-add-comment/with-add-comment';
+import witchActiveItem from '../../hocs/witch-active-item/witch-active-item';
 
-class Property extends Component {
+const AddReviewsWrapped = withAddComments(AddReviews);
+const PlaceListWrapped = witchActiveItem(PlaceList);
+
+class Property extends PureComponent {
   constructor(props) {
     super(props);
   }
@@ -22,7 +28,7 @@ class Property extends Component {
   }
 
   render() {
-    const {offer, reviews, nearOffers} = this.props;
+    const {offer, reviews, nearOffers, isAuthorization, offerId} = this.props;
     if (!offer) {
       return null;
     }
@@ -38,7 +44,7 @@ class Property extends Component {
               <HotelDescription offer={offer}/>
               <section className="property__reviews reviews">
                 <Reviews reviews={reviews}/>
-                <AddReviews />
+                {isAuthorization ? <AddReviewsWrapped hottelId={offerId}/> : null}
               </section>
             </div>
           </div>
@@ -51,7 +57,7 @@ class Property extends Component {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <PlaceList offers={nearOffers}/>
+              <PlaceListWrapped offers={nearOffers}/>
             </div>
           </section>
         </div>
@@ -65,8 +71,8 @@ const mapStateToProps = (state, {offerId}) => {
   return {
     offer: getCurrentOffer(offerId)(state),
     reviews: getReviewsList(state),
-    allOffers: getOffers(state),
-    nearOffers: getNearOffers(state)
+    nearOffers: getNearOffers(state),
+    isAuthorization: getAutorizationStatus(state)
   };
 };
 
@@ -81,7 +87,8 @@ Property.propTypes = {
   nearOffers: PropTypes.array,
   getReviews: PropTypes.func,
   reviews: PropTypes.array,
-  offerId: PropTypes.string
+  offerId: PropTypes.string,
+  isAuthorization: PropTypes.bool
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Property);

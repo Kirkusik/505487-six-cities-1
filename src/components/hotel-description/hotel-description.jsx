@@ -1,5 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import ButtonFeature from '../../components/button-feature/button-feature.jsx';
+import Rating from '../rating/rating.jsx';
+
 const HotelDescription = ({offer}) => {
   return (
     <React.Fragment>
@@ -8,16 +12,15 @@ const HotelDescription = ({offer}) => {
       </div> : ``}
       <div className="property__name-wrapper">
         <h1 className="property__name">{offer.title}</h1>
-        <button className="property__bookmark-button button" type="button">
-          <svg className="property__bookmark-icon" width={31} height={33}>
-            <use xlinkHref="#icon-bookmark" />
-          </svg>
-          <span className="visually-hidden">To bookmarks</span>
-        </button>
+        <ButtonFeature
+          svgSize={28}
+          className={`property__bookmark-button`}
+          id={offer.id}
+          isFavorite={offer.isFavorite}/>
       </div>
       <div className="property__rating rating">
         <div className="property__stars rating__stars">
-          <span style={{width: `96%`}} />
+          <Rating rating={offer.rating}/>
           <span className="visually-hidden">Rating</span>
         </div>
         <span className="property__rating-value rating__value">{offer.rating}</span>
