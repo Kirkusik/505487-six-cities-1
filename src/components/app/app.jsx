@@ -11,6 +11,9 @@ const MainPageWrapped = witchRoute(MainPage);
 
 const App = ({isAutorization}) => {
   return <MainPageWrapped isLoggedIn={isAutorization}/>;
+
+const App = () => {
+  return < Main />;
 };
 
 const mapStateToProps = (state) => {
