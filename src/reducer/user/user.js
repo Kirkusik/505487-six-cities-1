@@ -46,6 +46,8 @@ const Operation = {
         dispatch(ActionCreator.userSaveData(data));
         dispatch(ActionCreator.userLogin());
       }
+    }).catch(() => {
+      return;
     });
   }
 };
@@ -72,5 +74,6 @@ const reducer = (state = initialState, action) => {
 export {
   reducer,
   ActionCreator,
-  Operation
+  Operation,
+  ActionType
 };

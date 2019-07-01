@@ -13,9 +13,17 @@ export const getReviewsList = (state) => {
   return state[NAME_SPACE].reviews;
 };
 
-export const getCurrentId = (state) => {
-  return state[NAME_SPACE].currentOfferId;
+
+export const getFavoritesOffers = (state) => {
+  return state[NAME_SPACE].favorite;
 };
+
+export const getFavoritesCities = createSelector(
+    getFavoritesOffers,
+    (offers) => {
+      return new Set([...offers.map((offer) => offer.city.name)]);
+    }
+);
 
 export const getActiveCard = (state) => {
   return state[NAME_SPACE].activeOfferId;
