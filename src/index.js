@@ -9,7 +9,7 @@ import {createAPI} from './api';
 import reducer from './reducer/index';
 import {BrowserRouter} from 'react-router-dom';
 
-import App from './components/app/app.jsx';
+import App from './components/app/app';
 
 import {Operation} from './reducer/data/data';
 import {Operation as OperationUser} from './reducer/user/user';
