@@ -19,15 +19,13 @@ Enzyme.configure({adapter: new Adapter()});
 describe(`Test e2e value component`, () => {
   const clickHandler = jest.fn();
   const app = shallow(<PlaceCard
-    activeIndex={mock[0].id}
+    index={mock[0].id}
     data={mock[0]}
-    onClick = {clickHandler}/>);
+    onClickActiveCard = {clickHandler}/>);
 
   it(`Click on link - 'Head in Card'`, () => {
     const imageCard = app.find(`.place-card__image`);
-    imageCard.simulate(`click`, {
-      preventDefault: () => {},
-    });
+    imageCard.simulate(`click`);
 
     expect(clickHandler).toHaveBeenCalledTimes(1);
     expect(clickHandler).toHaveBeenCalledWith(mock[0].id);

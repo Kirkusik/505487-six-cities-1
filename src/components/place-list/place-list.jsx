@@ -8,14 +8,13 @@ export default class PlaceList extends PureComponent {
   }
 
   render() {
-    const {offers, onActiveItemChange, addFeatures} = this.props;
+    const {offers, onActiveItemChange} = this.props;
     return (
       <React.Fragment>
         <div className="cities__places-list places__list tabs__content">
           {offers.map((card, index) => {
 
             return <PlaceCard
-              addFeatures={addFeatures}
               onClickActiveCard={(id) => {
                 onActiveItemChange(id);
               }}
@@ -34,6 +33,7 @@ export default class PlaceList extends PureComponent {
 PlaceList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   city: PropTypes.string,
-  onActiveItemChange: PropTypes.func,
-  addFeatures: PropTypes.func
+  onActiveItemChange: PropTypes.func
 };
+
+

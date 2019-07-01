@@ -1,15 +1,11 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import PlaceCard from './place-card.jsx';
-import {createStore} from 'redux';
-import reducer from '../../reducer/index';
-import {Provider} from 'react-redux';
-import {Router} from 'react-router-dom';
-import history from '../../history';
+
 const mock = [
   {
     title: `Beautiful & luxurious apartment at great location`,
-    price: `120`,
+    price: 120,
     degree: `Apartment`,
     order: `Premium`,
     photo: `img/apartment-01.jpg`,
@@ -20,19 +16,13 @@ const mock = [
 it(`Correctly render component ItemCard`, () => {
   const testHandler = jest.fn();
   const tree = renderer
-  .create(
-      <Provider store={createStore(reducer)}>
-        <Router history={history}>
-          <PlaceCard
-            onClick={testHandler}
-            onDeHover={testHandler}
-            onHover={testHandler}
-            index={mock[0].id}
-            data={mock[0]}
-          />
-        </Router>
-      </Provider>
-  )
+  .create(<PlaceCard
+    onClick={testHandler}
+    onDeHover={testHandler}
+    onHover={testHandler}
+    index={mock[0].id}
+    data={mock[0]}
+  />)
   .toJSON();
 
   expect(tree).toMatchSnapshot();

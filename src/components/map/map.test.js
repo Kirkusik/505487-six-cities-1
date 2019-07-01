@@ -3,10 +3,6 @@ import renderer from 'react-test-renderer';
 import Map from './map.jsx';
 
 import leaflet from 'leaflet';
-import reducer from '../../reducer/index';
-import {Provider} from 'react-redux';
-import {createStore} from 'redux';
-
 
 leaflet.map = () => ({
   setView: () => {},
@@ -27,13 +23,9 @@ const mock = [
 
 it(`Snapshot test Map Component`, () => {
   const tree = renderer
-  .create(
-      <Provider store={createStore(reducer)}>
-        <Map
-          offers={mock}
-        />
-      </Provider>
-  ).toJSON();
+  .create(<Map
+    cards={mock}
+  />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
