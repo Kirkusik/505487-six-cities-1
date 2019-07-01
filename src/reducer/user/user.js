@@ -39,6 +39,16 @@ const Operation = {
           dispatch(ActionCreator.userLogin());
         }
       });
+  },
+  userSaveCockie: () => (dispatch, _getState, api) => {
+    return api.get(`/login`).then(({data, status}) => {
+      if (status === 200) {
+        dispatch(ActionCreator.userSaveData(data));
+        dispatch(ActionCreator.userLogin());
+      }
+    }).catch(() => {
+      return;
+    });
   }
 };
 
@@ -64,5 +74,6 @@ const reducer = (state = initialState, action) => {
 export {
   reducer,
   ActionCreator,
-  Operation
+  Operation,
+  ActionType
 };
