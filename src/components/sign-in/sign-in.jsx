@@ -12,12 +12,12 @@ class SignIn extends React.PureComponent {
   }
 
   componentDidMount() {
-    // Работает, но падают тесты
     // document.querySelector(`.page`).classList.add(`page--login`);
   }
   componentWillUnmount() {
     // document.querySelector(`.page`).classList.remove(`page--login`);
   }
+
   render() {
     const {emailValue,
       passwordValue,
@@ -75,7 +75,6 @@ class SignIn extends React.PureComponent {
     </React.Fragment>;
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {

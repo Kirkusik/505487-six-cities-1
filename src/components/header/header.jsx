@@ -30,8 +30,6 @@ const Header = ({isLoggedIn, userData}) => {
 
                   <span
                     className="header__user-name user__name">{isLoggedIn ? userData.email : `Sign in`}</span>
-
-
                 </Link>
               </li>
             </ul>

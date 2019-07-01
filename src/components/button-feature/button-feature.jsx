@@ -14,7 +14,6 @@ class ButtonFeature extends React.PureComponent {
     this.props.addFeatures(id, status);
   }
 
-
   render() {
     const {id, isFavorite, className, svgSize} = this.props;
     return <button

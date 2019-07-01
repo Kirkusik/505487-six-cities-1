@@ -40,7 +40,6 @@ const witchRoute = (Component) => {
 
   }
 
-
   WitchRoute.propTypes = {
     isLoggedIn: PropTypes.bool,
     offers: PropTypes.array

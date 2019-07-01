@@ -12,6 +12,7 @@ export default class PlaceCard extends PureComponent {
 
   render() {
     const {onHover, onClickActiveCard, activeIndex, data} = this.props;
+
     return (
       <article
         onMouseEnter={onHover}
