@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MainPage from './main';
+import MainPage from './main.jsx';
 
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
