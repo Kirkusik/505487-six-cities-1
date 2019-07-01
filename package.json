@@ -26,8 +26,5 @@
   },
   "engines": {
     "node": "10"
-  },
-  "dependencies": {
-    "leaflet": "1.5.1"
   }
 }

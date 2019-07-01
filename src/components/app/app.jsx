@@ -1,17 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import MainPage from '../main-page/main-page.jsx';
+import React from "react";
+import Main from "../main/main.jsx";
 
-const App = (props) => {
-  const {data} = props;
-
-  return <MainPage
-    data={data}
-  />;
-};
-
-App.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+const App = () => {
+  return < Main />;
 };
 
 export default App;
