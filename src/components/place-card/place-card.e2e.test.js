@@ -28,7 +28,7 @@ describe(`Test e2e value component`, () => {
     imageCard.simulate(`click`, {
       preventDefault: () => {},
     });
-
+    
     expect(clickHandler).toHaveBeenCalledTimes(1);
     expect(clickHandler).toHaveBeenCalledWith(mock[0].id);
   });
