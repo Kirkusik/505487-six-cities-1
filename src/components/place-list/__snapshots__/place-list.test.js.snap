@@ -6,8 +6,16 @@ exports[`Correctly render component MainCard 1`] = `
 >
   <article
     className="cities__place-card place-card"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
-    
+    <div
+      className="place-card__mark"
+    >
+      <span>
+        Premium
+      </span>
+    </div>
     <div
       className="cities__image-wrapper place-card__image-wrapper"
     >
@@ -19,6 +27,7 @@ exports[`Correctly render component MainCard 1`] = `
           className="place-card__image"
           height={200}
           onClick={[Function]}
+          src="img/apartment-01.jpg"
           width={260}
         />
       </a>
@@ -46,12 +55,11 @@ exports[`Correctly render component MainCard 1`] = `
         </div>
         <button
           className="place-card__bookmark-button button"
-          onClick={[Function]}
           type="button"
         >
           <svg
             className="place-card__bookmark-icon"
-            height={18}
+            height={19}
             width={18}
           >
             <use
@@ -74,7 +82,7 @@ exports[`Correctly render component MainCard 1`] = `
           <span
             style={
               Object {
-                "width": "0%",
+                "width": "93%",
               }
             }
           />
@@ -89,15 +97,16 @@ exports[`Correctly render component MainCard 1`] = `
         className="place-card__name"
       >
         <a
-          href="/offer/1"
-          onClick={[Function]}
+          href="#"
         >
           Beautiful & luxurious apartment at great location
         </a>
       </h2>
       <p
         className="place-card__type"
-      />
+      >
+        Apartment
+      </p>
     </div>
   </article>
 </div>

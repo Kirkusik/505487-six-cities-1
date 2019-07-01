@@ -9,14 +9,12 @@ const witchActiveItem = (Component) => {
         activeItem: null,
       };
       this._handleActiveItem = this._handleActiveItem.bind(this);
-
     }
 
     render() {
       return <Component
         activeItem={this.state.activeItem}
         onActiveItemChange={this._handleActiveItem}
-        addFeatures={this._addFeatures}
         {...this.props}/>;
     }
 

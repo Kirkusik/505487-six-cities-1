@@ -1,7 +1,7 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-class SortingOption extends PureComponent {
+class SortingOption extends Component {
 
   constructor(props) {
     super(props);
