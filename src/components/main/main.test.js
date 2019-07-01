@@ -1,13 +1,11 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MainPage from './main-page.jsx';
+import MainPage from './main.jsx';
 
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import leaflet from 'leaflet';
 import reducer from '../../reducer/index';
-import {Router} from 'react-router-dom';
-import history from '../../history';
 
 leaflet.map = () => ({
   setView: () => {},
@@ -31,14 +29,14 @@ it(`Correctly render component MainPage`, () => {
   const tree = renderer
   .create(
       <Provider store={store}>
-        <Router history={history}>
-          <MainPage
-            offers = {mock}
-          />
-        </Router>
+        <MainPage
+          offers = {mock}
+        />
       </Provider>
   )
   .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
+
+
