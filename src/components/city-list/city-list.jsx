@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CityList = ({cities, onChangeCity, currentCity}) => {
+const CityList = ({cities, onChangeCity, onActiveItemChange, currentCity}) => {
 
   return <ul className="locations__list tabs__list">
     {Array.from(cities).map((city) => <li key={city} className={`locations__item-link ${currentCity === city ? `tabs__item--active` : ``}`}>
@@ -9,6 +9,7 @@ const CityList = ({cities, onChangeCity, currentCity}) => {
         onClick={(evt) => {
           evt.preventDefault();
           onChangeCity(city);
+          onActiveItemChange(city);
         }}
         className="locations__item-link tabs__item"
         href="#">
