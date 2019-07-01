@@ -17,7 +17,6 @@ import history from '../../history';
 
 const SignInWrapped = witchAuthorization(SignIn);
 
-
 const App = ({isAutorization}) => {
   const SignInWrappedPrivate = witchPrivateRoute(SignInWrapped, !isAutorization);
   const FavoritesPrivate = witchPrivateRoute(Favorites, isAutorization, `/login`);
@@ -27,7 +26,7 @@ const App = ({isAutorization}) => {
       <Route path="/login" exact component={SignInWrappedPrivate} />
       <Route path="/favorites" exact component={FavoritesPrivate} />
       <Route path="/offer/:id" exact render={({match}) => <Property offerId={match.params.id} />} />
-      <Redirect to="/"/>
+      <Redirect to="/" />
     </Switch>
   </Router>;
 };
@@ -38,9 +37,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-
 App.propTypes = {
   getRoute: PropTypes.func,
   isAutorization: PropTypes.bool
 };
+
 export default connect(mapStateToProps)(App);
