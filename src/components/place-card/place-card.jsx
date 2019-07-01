@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
 
 export default class PlaceCard extends Component {
 
   constructor(props) {
     super(props);
+
   }
 
   render() {
@@ -14,12 +14,18 @@ export default class PlaceCard extends Component {
       title,
       degree,
       order,
-      previewImage,
+      photo,
       price} = this.props.data;
-    const {onHover, onClickActiveCard} = this.props;
+    const {
+      onClick,
+      onHover,
+      onDeHover} = this.props;
     return (
       <article
-        onMouseEnter={onHover}
+        onMouseEnter={() => {
+          onHover(id);
+        }}
+        onMouseLeave={onDeHover}
         className="cities__place-card place-card">
         <div className="place-card__mark">
           <span>{order}</span>
@@ -27,11 +33,11 @@ export default class PlaceCard extends Component {
         <div className="cities__image-wrapper place-card__image-wrapper">
           <a href="#" >
             <img
-              onClick={() => {
-                onClickActiveCard(id);
+              onClick={()=> {
+                onClick(id);
               }}
               className="place-card__image"
-              src={previewImage}
+              src={photo}
               width={260}
               height={200}
               alt="Place image" />
@@ -57,7 +63,7 @@ export default class PlaceCard extends Component {
             </div>
           </div>
           <h2 className="place-card__name">
-            <Link to={`/offer/${id}`} >{title}</Link>
+            <a href="#" >{title}</a>
           </h2>
           <p className="place-card__type">{degree}</p>
         </div>
@@ -67,15 +73,15 @@ export default class PlaceCard extends Component {
 }
 
 PlaceCard.propTypes = {
-  onClickActiveCard: PropTypes.func,
+  onClick: PropTypes.func,
+  onDeHover: PropTypes.func,
   onHover: PropTypes.func,
   data: PropTypes.shape({
-    previewImage: PropTypes.string,
     id: PropTypes.number,
     degree: PropTypes.string,
     order: PropTypes.string,
     photo: PropTypes.string,
-    price: PropTypes.number,
+    price: PropTypes.string,
     title: PropTypes.string,
   }).isRequired,
 };

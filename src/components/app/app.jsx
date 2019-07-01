@@ -1,27 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import Main from "../main/main.jsx";
 
-import MainPage from '../main/main';
-
-import {connect} from 'react-redux';
-import {getAutorizationStatus} from '../../reducer/user/selectors';
-import witchRoute from '../../hocs/witch-route/witch-route';
-
-const MainPageWrapped = witchRoute(MainPage);
-
-const App = ({isAutorization}) => {
-
-  return <MainPageWrapped isLoggedIn={isAutorization}/>;
+const App = () => {
+  return < Main />;
 };
 
-const mapStateToProps = (state) => {
-  return {
-    isAutorization: getAutorizationStatus(state),
-  };
-};
-
-App.propTypes = {
-  getRoute: PropTypes.func,
-  isAutorization: PropTypes.bool
-};
-export default connect(mapStateToProps)(App);
+export default App;
