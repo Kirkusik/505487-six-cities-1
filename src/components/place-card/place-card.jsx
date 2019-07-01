@@ -1,48 +1,34 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
+import ButtonFeature from '../../components/button-feature/button-feature.jsx';
+import Rating from '../rating/rating.jsx';
 
-export default class PlaceCard extends Component {
+export default class PlaceCard extends PureComponent {
 
   constructor(props) {
     super(props);
-
   }
 
   render() {
-<<<<<<< HEAD
     const {onHover, onClickActiveCard, activeIndex, data} = this.props;
-
-=======
-    const {
-      id,
-      title,
-      degree,
-      order,
-      photo,
-      price} = this.props.data;
-    const {
-      onClick,
-      onHover,
-      onDeHover} = this.props;
->>>>>>> parent of 3afcd22... finish
     return (
       <article
-        onMouseEnter={() => {
-          onHover(id);
-        }}
-        onMouseLeave={onDeHover}
+        onMouseEnter={onHover}
         className="cities__place-card place-card">
-        <div className="place-card__mark">
-          <span>{order}</span>
-        </div>
+        {data.isPremium ? <div className="place-card__mark">
+          <span>Premium</span>
+        </div> : ``}
+
         <div className="cities__image-wrapper place-card__image-wrapper">
           <a href="#" >
             <img
-              onClick={()=> {
-                onClick(id);
+              onClick={(evt) => {
+                evt.preventDefault();
+                onClickActiveCard(activeIndex);
               }}
               className="place-card__image"
-              src={photo}
+              src={data.previewImage}
               width={260}
               height={200}
               alt="Place image" />
@@ -51,26 +37,25 @@ export default class PlaceCard extends Component {
         <div className="place-card__info">
           <div className="place-card__price-wrapper">
             <div className="place-card__price">
-              <b className="place-card__price-value">€{price}</b>
+              <b className="place-card__price-value">€{data.price}</b>
               <span className="place-card__price-text">/&nbsp;night</span>
             </div>
-            <button className="place-card__bookmark-button button" type="button">
-              <svg className="place-card__bookmark-icon" width={18} height={19}>
-                <use xlinkHref="#icon-bookmark" />
-              </svg>
-              <span className="visually-hidden">To bookmarks</span>
-            </button>
+            <ButtonFeature
+              svgSize={18}
+              className={`place-card__bookmark-button`}
+              id={data.id}
+              isFavorite={data.isFavorite}/>
           </div>
           <div className="place-card__rating rating">
             <div className="place-card__stars rating__stars">
-              <span style={{width: `93%`}} />
+              <Rating rating={data.rating}/>
               <span className="visually-hidden">Rating</span>
             </div>
           </div>
           <h2 className="place-card__name">
-            <a href="#" >{title}</a>
+            <Link to={`/offer/${data.id}`} >{data.title}</Link>
           </h2>
-          <p className="place-card__type">{degree}</p>
+          <p className="place-card__type">{data.type}</p>
         </div>
       </article>
     );
@@ -78,17 +63,20 @@ export default class PlaceCard extends Component {
 }
 
 PlaceCard.propTypes = {
-  onClick: PropTypes.func,
-  onDeHover: PropTypes.func,
+  onClickActiveCard: PropTypes.func,
+  activeIndex: PropTypes.number,
   onHover: PropTypes.func,
   data: PropTypes.shape({
+    previewImage: PropTypes.string,
     id: PropTypes.number,
     degree: PropTypes.string,
     order: PropTypes.string,
     photo: PropTypes.string,
-    price: PropTypes.string,
+    price: PropTypes.number,
     title: PropTypes.string,
+    isPremium: PropTypes.bool,
+    isFavorite: PropTypes.bool,
+    rating: PropTypes.number,
+    type: PropTypes.string
   }).isRequired,
 };
-
-
