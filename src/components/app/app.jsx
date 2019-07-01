@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MainPage from '../main-page/main-page';
+import MainPage from '../main/main';
 
 import {connect} from 'react-redux';
 import {getAutorizationStatus} from '../../reducer/user/selectors';

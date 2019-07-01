@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MainPage from './main-page';
+import MainPage from './main';
 
 import {
   Provider
