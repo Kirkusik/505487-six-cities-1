@@ -47,6 +47,12 @@ const Operation = {
       .then(({data}) => {
         dispatch(ActionCreator.loadFavotiresOffers(data));
       });
+  },
+  reloadFavotiresOffers: () => (dispatch, _getState, api) => {
+    return api.get(`/favorite`)
+      .then(({data}) => {
+        dispatch(ActionCreator.reloadFavotiresOffers((data)));
+      });
   }
 };
 
@@ -111,6 +117,27 @@ describe(`Reducer testing on AXIOS`, () => {
           expect(dispatch).toHaveBeenCalledTimes(1);
           expect(dispatch).toHaveBeenNthCalledWith(1, {
             type: ActionType.LOAD_FAV_OFFERS,
+            offers: [{fake: true}]
+          });
+        });
+  });
+
+  it(`Test Call RELOAD_FAV_OFFERS`, () => {
+    const dispatch = jest.fn();
+    const api = createAPI();
+
+    const apiMock = new MockAdapter(api);
+
+    const reloadFavotiresOffers = Operation.reloadFavotiresOffers();
+    apiMock
+      .onGet(`/favorite`)
+      .reply(200, [{fake: true}]);
+
+    return reloadFavotiresOffers(dispatch, jest.fn(), api)
+        .then(() => {
+          expect(dispatch).toHaveBeenCalledTimes(1);
+          expect(dispatch).toHaveBeenNthCalledWith(1, {
+            type: ActionType.RELOAD_FAV_OFFERS,
             offers: [{fake: true}]
           });
         });
