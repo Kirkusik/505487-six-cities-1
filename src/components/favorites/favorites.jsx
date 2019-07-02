@@ -16,12 +16,12 @@ class Favorites extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.props.loadOffers();
+    this.props.loadFavorites();
   }
 
-  componentDidUpdate() {
-    this.props.loadOffers();
-  }
+  // componentDidUpdate() {
+  //   this.props.reloadFavorites();
+  // }
 
   render() {
     const {offers, cities} = this.props;
@@ -61,13 +61,16 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  loadOffers: () => dispatch(Operation.loadFavoritesOffers())
+  loadFavorites: () => dispatch(Operation.loadFavoritesOffers()),
+  reloadFavorites: () => dispatch(Operation.reloadFavotiresOffers()),
 });
 
 Favorites.propTypes = {
-  loadOffers: PropTypes.func,
+  reloadFavorites: PropTypes.func,
+  loadFavorites: PropTypes.func,
   offers: PropTypes.array,
-  cities: PropTypes.object
+  cities: PropTypes.object,
+  isFavorite: PropTypes.bool
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

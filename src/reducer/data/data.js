@@ -14,7 +14,8 @@ export const ActionType = {
   ACTIVE_OFFER: `ACTIVE_OFFER`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   RELOAD_OFFER: `RELOAD_OFFER`,
-  LOAD_FAV_OFFERS: `LOAD_FAV_OFFERS`
+  LOAD_FAV_OFFERS: `LOAD_FAV_OFFERS`,
+  RELOAD_FAV_OFFERS: `RELOAD_FAV_OFFERS`,
 };
 
 const ActionCreator = {
@@ -51,6 +52,12 @@ const ActionCreator = {
   loadFavotiresOffers: (offers) => {
     return {
       type: ActionType.LOAD_FAV_OFFERS,
+      offers
+    };
+  },
+  reloadFavotiresOffers: (offers) => {
+    return {
+      type: ActionType.RELOAD_FAV_OFFERS,
       offers
     };
   }
@@ -92,6 +99,12 @@ const Operation = {
       .then(({data}) => {
         dispatch(ActionCreator.loadFavotiresOffers(adapter(data)));
       });
+  },
+  reloadFavotiresOffers: () => (dispatch, _getState, api) => {
+    return api.get(`/favorite`)
+      .then(({data}) => {
+        dispatch(ActionCreator.reloadFavotiresOffers(adapter(data)));
+      });
   }
 };
 
@@ -124,6 +137,15 @@ const reducer = (state = initialState, action) => {
         })
       });
     case `LOAD_FAV_OFFERS`:
+      return Object.assign({}, state, {
+        favorite: action.offers
+      });
+    case `RELOAD_FAV_OFFERS`:
+      // return Object.assign({}, state, {
+      //   offers: state.offers.filter((content) => {
+      //     return content.is_favorite === true;
+      //   })
+      // });
       return Object.assign({}, state, {
         favorite: action.offers
       });
